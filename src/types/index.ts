@@ -1,17 +1,18 @@
 export interface User {
-  id: number;
-  name?: string;
-  status?: string;
+  id?: number;
+  name: string;
   email: string;
+  role: string;
   phone?: string;
-  roleId: number;
+  status?: string;
   createdAt?: string;
-  updatedAt?: string;
 }
 
 export interface AuthResponse {
   token: string;
-  user: User;
+  email: string;
+  name: string;
+  role: string;
 }
 
 export interface LoginDto {
@@ -33,6 +34,7 @@ export interface Product {
   price: number;
   oldPrice?: number;
   imageUrl?: string;
+  imgUrls?: string[];
   rating?: number;
   reviewCount?: number;
   brandId?: number;
@@ -40,8 +42,10 @@ export interface Product {
   categoryId?: number;
   categoryName?: string;
   sellerId?: number;
+  sellerName?: string;
   quantity?: number;
   badge?: string;
+  isActive?: boolean;
 }
 
 export interface CartItem {
@@ -52,26 +56,65 @@ export interface CartItem {
   unitPrice: number;
 }
 
+export interface Review {
+  id: number;
+  productId: number;
+  userId: number;
+  rating: number;
+  text?: string;
+  createdDate?: string;
+  updatedDate?: string;
+}
+
+export interface CreateReviewDto {
+  productId: number;
+  rating: number;
+  text?: string;
+}
+
 export interface ApiError {
   message: string;
   errors?: Record<string, string[]>;
 }
-export interface CreateProductDto {
-  name: string;
-  description?: string;
-  price: number;
+
+export interface OrderItemDto {
+  productId: number;
+  productName: string;
   quantity: number;
-  brandId: number;
-  categoryId: number;
-  imgUrls?: string[];
+  unitPrice: number;
+  total: number;
 }
+
+export interface OrderDto {
+  id: number;
+  orderStatus: string;
+  totalAmount: number;
+  deliveryAddress: string;
+  phone: string;
+  comment?: string;
+  createdDate?: string;
+  items: OrderItemDto[];
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  parentId?: number;
+}
+
+export interface Cart {
+  id: number;
+  userId: number;
+  items: CartItem[];
+}
+
 export interface BasketProps {
   cartItems?: CartItem[];
-  products?: Product[]; 
-  suggestions?: Product[]; 
-  favoriteIds?: number[]; 
-  bonuses?: number; 
-  cashback?: number; 
+  products?: Product[];
+  suggestions?: Product[];
+  favoriteIds?: number[];
+  bonuses?: number;
+  cashback?: number;
   onQuantityChange?: (cartItemId: number, quantity: number) => void;
   onRemove?: (cartItemId: number) => void;
   onClear?: () => void;
@@ -84,7 +127,7 @@ export interface BasketProps {
 export interface PaymentMethod {
   id: string;
   name: string;
-  description: string; 
+  description: string;
   requiresCard?: boolean;
 }
 
@@ -94,7 +137,6 @@ export interface PaymentFormData {
   cardExpiry?: string;
   cardCvv?: string;
 }
-
 
 export interface OrderItem {
   id: string;
@@ -118,15 +160,6 @@ export interface CheckoutPaymentProps {
   onSubmit?: (data: PaymentFormData) => void;
   onApplyPromo?: (code: string) => void;
 }
-export interface OrderItem {
-  id: string;
-  name: string;
-  variant: string;
-  qty: number;
-  brand: string;
-  price: number;
-  image: string;
-}
 
 export interface PaymentNavState {
   paymentMethodId?: string;
@@ -138,38 +171,32 @@ export interface PaymentNavState {
   deliveryLabel?: string;
   cashback?: number;
   total?: number;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  address?: string;
+  comment?: string;
 }
 
-export interface DeliveryMethod {
-  id: string;
-  name: string;
-  eta: string; 
-  price: number; 
-}
-
-export interface CheckoutFormData {
-  firstName: string;
-  lastName: string;
-  phone: string;
-  city: string;
-  deliveryMethodId: string;
-  address: string;
-  comment: string;
-}
-
-export interface CheckoutDeliveryProps {
+export interface DeliveryNavState {
+  items?: OrderItem[];
   itemsCount?: number;
   goodsTotal?: number;
   cashback?: number;
-  deliveryMethods?: DeliveryMethod[];
-  onSubmit?: (data: CheckoutFormData) => void;
-  onApplyPromo?: (code: string) => void;
+  deliveryPrice?: number;
+  deliveryLabel?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  address?: string;
+  comment?: string;
 }
+
 export interface DeliveryMethod {
   id: string;
   name: string;
-  eta: string; // напр. "1-2 дні"
-  price: number; // 0 = безкоштовно
+  eta: string;
+  price: number;
 }
 
 export interface CheckoutFormData {

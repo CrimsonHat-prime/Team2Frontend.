@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { ALL_CATEGORIES, CATEGORIES } from '../../data/categories';
+import { useCart } from '../../context/CartContext';
+import { CATEGORIES, ALL_CATEGORIES } from '../../data/categories';
 import { CategoryDropdown } from '../CategoryDropdown/CategoryDropdown';
 import styles from './Header.module.css';
 
@@ -17,27 +18,27 @@ interface HeaderProps {
 }
 
 export default function Header({ full = true }: HeaderProps) {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
+  const { itemCount } = useCart();
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (query.trim()) navigate(`/?search=${encodeURIComponent(query)}`);
-  };
-
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setHoveredTab(null);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) navigate(`/catalog?q=${encodeURIComponent(query)}`);
+  };
 
   return (
     <header className={styles.header}>
@@ -75,16 +76,20 @@ export default function Header({ full = true }: HeaderProps) {
           <span className={styles.currency}>₴</span>
 
           {isAuthenticated ? (
-            <img src={accountIcon} alt="Акаунт" className={styles.accountIcon} onClick={logout} />
+            <Link to="/profile">
+              <img src={accountIcon} alt="Профіль" className={styles.accountIcon} />
+            </Link>
           ) : (
             <Link to="/login">
-              <img src={accountIcon} alt="Акаунт" className={styles.accountIcon} />
+              <img src={accountIcon} alt="Увійти" className={styles.accountIcon} />
             </Link>
           )}
 
-          <Link to="/basket" className={styles.cartWrap}>
+          <Link to="/cart" className={styles.cartWrap}>
             <img src={cartIcon} alt="Кошик" className={styles.cartIcon} />
-            <span className={styles.cartBadge}>0</span>
+            {itemCount > 0 && (
+              <span className={styles.cartBadge}>{itemCount > 99 ? '99+' : itemCount}</span>
+            )}
           </Link>
         </div>
       </div>
@@ -96,27 +101,31 @@ export default function Header({ full = true }: HeaderProps) {
             onMouseEnter={() => setHoveredTab(ALL_CATEGORIES.id)}
             onMouseLeave={() => setHoveredTab(null)}
           >
-            <Link to="/categories" className={styles.catAllBtn}>
-    {ALL_CATEGORIES.name}
-  </Link>
-  {hoveredTab === ALL_CATEGORIES.id && (
-    <CategoryDropdown category={ALL_CATEGORIES} />
-  )}
+            <button
+              type="button"
+              className={styles.catAllBtn}
+              onClick={() => navigate('/categories')}
+            >
+              {ALL_CATEGORIES.name}
+            </button>
+            {hoveredTab === ALL_CATEGORIES.id && (
+              <CategoryDropdown category={ALL_CATEGORIES} />
+            )}
           </div>
 
-          {CATEGORIES.map((cat) => (
-            <div
-              key={cat.id}
-              className={styles.catTab}
-              onMouseEnter={() => setHoveredTab(cat.id)}
-              onMouseLeave={() => setHoveredTab(null)}
-            >
-              <button type="button" className={styles.catLink}>
-                {cat.name}
-              </button>
-              {hoveredTab === cat.id && <CategoryDropdown category={cat} />}
-            </div>
-          ))}
+          <div className={styles.catLinks}>
+            {CATEGORIES.map((cat) => (
+              <div
+                key={cat.id}
+                className={styles.catTab}
+                onMouseEnter={() => setHoveredTab(cat.id)}
+                onMouseLeave={() => setHoveredTab(null)}
+              >
+                <span className={styles.catLink} onClick={() => navigate(`/catalog?categoryId=${cat.backendId}`)} style={{cursor:'pointer'}}>{cat.name}</span>
+                {hoveredTab === cat.id && <CategoryDropdown category={cat} />}
+              </div>
+            ))}
+          </div>
         </nav>
       )}
     </header>

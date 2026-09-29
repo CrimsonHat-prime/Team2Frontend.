@@ -1,0 +1,451 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+.page {
+  font-family: "Montserrat", system-ui, sans-serif;
+  color: #323f37;
+  min-height: 100vh;
+  background: #fefefe;
+}
+
+.inner {
+  max-width: 1980px;
+  margin: 0 auto;
+  padding: 0 90px 60px;
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 0;
+  font-size: 20px;
+  font-weight: 500;
+}
+.crumbs a {
+  color: #323f37;
+  text-decoration: none;
+}
+.crumbsCurrent {
+  color: #000;
+}
+
+.panel {
+  background: #f1f9f1;
+  border-radius: 20px;
+  padding: 26px 32px 40px;
+}
+
+.layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* Sidebar */
+.sidebar {
+  flex: 0 0 324px;
+  width: 324px;
+  background: #fffeff;
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  border-radius: 20px;
+  padding: 20px 20px 35px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sidebarTitle {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+  color: #323f37;
+}
+.navItem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  color: #323f37;
+  padding: 13px 26px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.navItem:hover {
+  background: rgba(35, 117, 63, 0.08);
+}
+.navActive {
+  background: #23753f;
+  color: #e9fff4;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) inset;
+}
+.navActive:hover {
+  background: #23753f;
+}
+
+/* Main content */
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.topRow {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.leftCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.identityRow {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.avatar {
+  flex: none;
+  width: 114px;
+  height: 114px;
+  border-radius: 50%;
+  background: rgba(255, 151, 47, 0.37);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 800;
+  color: #fff;
+}
+.identityInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.name {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: #323f37;
+}
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 54px;
+  font-size: 24px;
+  font-weight: 500;
+}
+.contactEmail {
+  color: #000;
+}
+.contactPhone {
+  color: #323f37;
+}
+
+.fieldsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 375px));
+  gap: 20px 62px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fieldLabel {
+  font-size: 24px;
+  font-weight: 700;
+  color: #323f37;
+}
+.fieldInput {
+  height: 65px;
+  border-radius: 15px;
+  background: #fefefe;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0 20px;
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 500;
+  color: #323f37;
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+}
+.fieldInput:focus {
+  border-color: #23753f;
+}
+
+.saveBtn {
+  align-self: flex-start;
+  width: 310px;
+  height: 65px;
+  border: 1px solid #23753f;
+  border-radius: 15px;
+  background: #23753f;
+  color: #fff;
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) inset;
+}
+.saveBtn:hover {
+  background: #1b5e32;
+}
+.saveBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.saveMsg {
+  font-size: 16px;
+  font-weight: 600;
+  color: #23753f;
+}
+.saveErr {
+  font-size: 16px;
+  font-weight: 600;
+  color: #d62d2d;
+}
+
+/* Loyalty card */
+.loyaltyCard {
+  flex: 0 0 446px;
+  width: 446px;
+  background: #fefefe;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.loyaltyTitle {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  color: #323f37;
+}
+.loyaltyBonuses {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #323f37;
+}
+.loyaltyCashback {
+  margin: 6px 0 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #323f37;
+}
+.progressTrack {
+  margin-top: 10px;
+  width: 100%;
+  height: 16px;
+  border-radius: 15px;
+  background: #fff;
+  border: 1px solid #23753f;
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  border-radius: 15px;
+  background: #05bc52;
+  border: 1px solid #23753f;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) inset;
+  transition: width 0.3s;
+}
+.loyaltyHint {
+  margin: 8px 0 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #323f37;
+}
+.spendBtn {
+  align-self: flex-start;
+  margin-top: 10px;
+  width: 179px;
+  height: 55px;
+  border: 1px solid #23753f;
+  border-radius: 15px;
+  background: #23753f;
+  color: #fff;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) inset;
+}
+.spendBtn:hover {
+  background: #1b5e32;
+}
+
+/* Stat cards */
+.statsRow {
+  display: flex;
+  gap: 62px;
+  flex-wrap: wrap;
+}
+.statCard {
+  flex: 1 1 375px;
+  max-width: 375px;
+  height: 143px;
+  box-sizing: border-box;
+  background: #fefefe;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #323f37;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+.statCard:hover {
+  border-color: #23753f;
+}
+.statValue {
+  font-weight: 700;
+}
+
+/* Placeholder sections for not-yet-implemented sidebar tabs */
+.placeholder {
+  background: #fefefe;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  padding: 60px 40px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #666;
+}
+
+/* Orders list (Замовлення tab) */
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.orderRow {
+  background: #fefefe;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.orderRowLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.orderId {
+  font-weight: 700;
+  font-size: 18px;
+}
+.orderMeta {
+  font-size: 14px;
+  color: #666;
+}
+.orderStatusBadge {
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(35, 117, 63, 0.12);
+  color: #23753f;
+}
+.orderTotal {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* Favorites (Обране) */
+.favGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.favCard {
+  width: 220px;
+  background: #fefefe;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+.favImg {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: #f0f0f0;
+}
+.favBody {
+  padding: 12px;
+}
+.favName {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.favPrice {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+@media (max-width: 1500px) {
+  .layout,
+  .topRow {
+    flex-direction: column;
+  }
+  .sidebar,
+  .loyaltyCard {
+    width: 100%;
+    flex: none;
+  }
+  .identityRow {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 900px) {
+  .fieldsGrid {
+    grid-template-columns: 1fr;
+  }
+  .statsRow {
+    flex-direction: column;
+  }
+  .statCard {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .inner {
+    padding: 0 16px 40px;
+  }
+  .saveBtn {
+    width: 100%;
+  }
+}
