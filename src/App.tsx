@@ -17,7 +17,7 @@ import { CategoryCatalogPage } from './pages/CategoryCatalogPage/CategoryCatalog
 import { AllProductsPage } from './pages/AllProductsPage/AllProductsPage';
 import Delivery from './pages/Delivery/Delivery';
 import Payment from './pages/Payment/Payment';
-import { OrderVerification } from './pages/OrderVerification /OrderVerification';
+import { OrderVerification } from './pages/OrderVerification/OrderVerification';
 
 export default function App() {
   return (
